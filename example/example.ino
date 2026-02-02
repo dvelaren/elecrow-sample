@@ -28,16 +28,16 @@ PCA9557 Out;  // for touch timing init
 
 // Subrutinas y funciones
 /* Display flushing */
-void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p) {
+void my_disp_flush(lv_disp_drv_t* disp, const lv_area_t* area, lv_color_t* color_p) {
   uint32_t w = (area->x2 - area->x1 + 1);
   uint32_t h = (area->y2 - area->y1 + 1);
 
-  tft.pushImageDMA(area->x1, area->y1, w, h, (lgfx::rgb565_t *)&color_p->full);
+  tft.pushImageDMA(area->x1, area->y1, w, h, (lgfx::rgb565_t*)&color_p->full);
 
   lv_disp_flush_ready(disp);
 }
 
-void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data) {
+void my_touchpad_read(lv_indev_drv_t* indev_driver, lv_indev_data_t* data) {
   uint16_t touchX, touchY;
   bool touched = tft.getTouch(&touchX, &touchY);
   if (!touched) {
@@ -88,6 +88,7 @@ void setup() {
 
   // Display Prepare
   tft.begin();
+  // tft.setRotation(2); // 0 (0°), 1(90°), 2 (180°), 3 (270°)
   tft.fillScreen(TFT_BLACK);
   tft.setTextSize(2);
   delay(200);
