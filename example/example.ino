@@ -8,7 +8,6 @@
 #include "ui.h"
 
 // Etiquetado de pines
-#define TFT_BL_PIN 2      // Pin de retroiluminación de la pantalla TFT
 #define I2C_SDA_PIN 19    // Pin SDA para I2C
 #define I2C_SCL_PIN 20    // Pin SCL para I2C
 #define I2S_SDIN_PIN 17   // Pin SDIN para I2S
@@ -63,14 +62,12 @@ void setup() {
   pinMode(I2S_SDIN_PIN, OUTPUT);
   pinMode(I2S_LRCLK_PIN, OUTPUT);
   pinMode(I2S_BCLK_PIN, OUTPUT);
-  pinMode(TFT_BL_PIN, OUTPUT);
 
   // 2. Limpieza de salidas
   digitalWrite(GPIO_D_PIN, LOW);
   digitalWrite(I2S_SDIN_PIN, LOW);
   digitalWrite(I2S_LRCLK_PIN, LOW);
   digitalWrite(I2S_BCLK_PIN, LOW);
-  analogWrite(TFT_BL_PIN, DEFAULT_BRIGHTNESS);
 
   // 3. Comunicaciones
   Serial.begin(115200);
@@ -88,6 +85,7 @@ void setup() {
 
   // Display Prepare
   tft.begin();
+  tft.setBrightness(DEFAULT_BRIGHTNESS);
   // tft.setRotation(2); // 0 (0°), 1(90°), 2 (180°), 3 (270°)
   tft.fillScreen(TFT_BLACK);
   tft.setTextSize(2);
